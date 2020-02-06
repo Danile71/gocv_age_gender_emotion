@@ -15,7 +15,7 @@ var (
 	faceConfig = "data/face/opencv_face_detector.pbtxt"
 
 	emotionModel  = "data/emotion/EmotiW_VGG_S.caffemodel"
-	emotionConfig = "data/emotion/emo_deploy.prototxt"
+	emotionConfig = "data/emotion/deploy.prototxt"
 	Emotions      = []string{"Angry", "Disgust", "Fear", "Happy", "Neutral", "Sad", "Surprise"}
 
 	ageModel  = "data/age/age_net.caffemodel"
@@ -49,8 +49,8 @@ func main() {
 		return
 	}
 	defer faceNet.Close()
-	faceNet.SetPreferableBackend(gocv.NetBackendDefault)
-	faceNet.SetPreferableTarget(gocv.NetTargetCPU)
+	faceNet.SetPreferableBackend(gocv.NetBackendCUDA)
+	faceNet.SetPreferableTarget(gocv.NetTargetCUDA)
 
 	// open DNN object tracking model
 	emotionNet := gocv.ReadNet(emotionModel, emotionConfig)
@@ -59,8 +59,8 @@ func main() {
 		return
 	}
 	defer emotionNet.Close()
-	emotionNet.SetPreferableBackend(gocv.NetBackendDefault)
-	emotionNet.SetPreferableTarget(gocv.NetTargetCPU)
+	emotionNet.SetPreferableBackend(gocv.NetBackendCUDA)
+	emotionNet.SetPreferableTarget(gocv.NetTargetCUDA)
 
 	// open DNN object tracking model
 	ageNet := gocv.ReadNet(ageModel, ageConfig)
@@ -69,8 +69,8 @@ func main() {
 		return
 	}
 	defer ageNet.Close()
-	ageNet.SetPreferableBackend(gocv.NetBackendDefault)
-	ageNet.SetPreferableTarget(gocv.NetTargetCPU)
+	ageNet.SetPreferableBackend(gocv.NetBackendCUDA)
+	ageNet.SetPreferableTarget(gocv.NetTargetCUDA)
 
 	// open DNN object tracking model
 	genderNet := gocv.ReadNet(genderModel, genderConfig)
@@ -79,8 +79,8 @@ func main() {
 		return
 	}
 	defer genderNet.Close()
-	genderNet.SetPreferableBackend(gocv.NetBackendDefault)
-	genderNet.SetPreferableTarget(gocv.NetTargetCPU)
+	genderNet.SetPreferableBackend(gocv.NetBackendCUDA)
+	genderNet.SetPreferableTarget(gocv.NetTargetCUDA)
 
 	var (
 		ratio   float64 = 1.0
